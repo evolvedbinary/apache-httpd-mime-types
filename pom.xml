@@ -19,19 +19,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>9</version>
-    </parent>
-
     <groupId>com.evolvedbinary.thirdparty.org.apache.httpd</groupId>
     <artifactId>apache-httpd-mime-types</artifactId>
     <version>1.0.1-SNAPSHOT</version>
 
     <name>Apache HTTP Server mime.types</name>
     <description>The mime.types file from the Apache HTTP Server project</description>
-    <url>https://github.com/evolvedbinary/mime-types</url>
+    <url>https://github.com/evolvedbinary/apache-httpd-mime-types</url>
     <inceptionYear>2020</inceptionYear>
 
     <organization>
@@ -73,7 +67,7 @@
             <plugin>
                 <groupId>com.googlecode.maven-download-plugin</groupId>
                 <artifactId>download-maven-plugin</artifactId>
-                <version>1.6.0</version>
+                <version>1.13.0</version>
                 <executions>
                     <execution>
                         <id>httpd-mime.types</id>
@@ -84,7 +78,7 @@
                         <configuration>
                             <url>https://raw.githubusercontent.com/apache/httpd/${apache.httpd.version}/docs/conf/mime.types</url>
                             <readTimeOut>120000</readTimeOut>
-                            <sha1>e01bd6d5de1304d61f33159a7c95f0d78d3ef7ac</sha1>
+                            <sha1>1dc6b2c91b7a0ca43924d33b6252b1b134d439c8</sha1>
                             <checkSignature>true</checkSignature>
                             <outputFileName>mime.types</outputFileName>
                             <outputDirectory>${project.build.outputDirectory}/META-INF</outputDirectory>
@@ -96,20 +90,24 @@
             <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>3.0</version>
+                <version>4.6</version>
                 <configuration>
-                    <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
                     <failIfMissing>true</failIfMissing>
                     <strictCheck>true</strictCheck>
-                    <properties>
-                        <owner>${project.organization.name}</owner>
-                        <email>${contact.email}</email>
-                    </properties>
-                    <excludes>
-                        <exclude>**/README.md</exclude>
-                        <exclude>**/LICENSE</exclude>
-                    </excludes>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                    <licenseSets>
+                        <licenseSet>
+                            <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+                            <properties>
+                                <owner>${project.organization.name}</owner>
+                                <email>${contact.email}</email>
+                            </properties>
+                            <excludes>
+                                <exclude>**/README.md</exclude>
+                                <exclude>**/LICENSE</exclude>
+                            </excludes>
+                        </licenseSet>
+                    </licenseSets>
                 </configuration>
                 <executions>
                     <execution>
@@ -139,7 +137,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.4.2</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -150,8 +148,9 @@
                             <Build-Tag>${build-tag}</Build-Tag>
                             <Git-Commit>${build-commit}</Git-Commit>
                             <Git-Commit-Abbrev>${build-commit-abbrev}</Git-Commit-Abbrev>
+                            <Git-Commit-Timestamp>${build-tstamp}</Git-Commit-Timestamp>
                             <Build-Version>${build-version}</Build-Version>
-                            <Build-Timestamp>${build-tstamp}</Build-Timestamp>
+                            <Build-Timestamp>${maven.build.timestamp}</Build-Timestamp>
                             <Source-Repository>${project.scm.connection}</Source-Repository>
                             <Description>${project.description}</Description>
                             <Implementation-URL>${project.url}</Implementation-URL>
@@ -161,7 +160,6 @@
             </plugin>
 
             <plugin>
-                <!-- Attach source jars -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>3.2.1</version>
@@ -175,8 +173,9 @@
                             <Build-Tag>${build-tag}</Build-Tag>
                             <Git-Commit>${build-commit}</Git-Commit>
                             <Git-Commit-Abbrev>${build-commit-abbrev}</Git-Commit-Abbrev>
+                            <Git-Commit-Timestamp>${build-tstamp}</Git-Commit-Timestamp>
                             <Build-Version>${build-version}</Build-Version>
-                            <Build-Timestamp>${build-tstamp}</Build-Timestamp>
+                            <Build-Timestamp>${maven.build.timestamp}</Build-Timestamp>
                             <Source-Repository>${project.scm.connection}</Source-Repository>
                             <Description>${project.description}</Description>
                             <Implementation-URL>${project.url}</Implementation-URL>
@@ -196,19 +195,73 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.12.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Build-Tag>${build-tag}</Build-Tag>
+                            <Git-Commit>${build-commit}</Git-Commit>
+                            <Git-Commit-Abbrev>${build-commit-abbrev}</Git-Commit-Abbrev>
+                            <Git-Commit-Timestamp>${build-tstamp}</Git-Commit-Timestamp>
+                            <Build-Version>${build-version}</Build-Version>
+                            <Build-Timestamp>${maven.build.timestamp}</Build-Timestamp>
+                            <Source-Repository>${project.scm.connection}</Source-Repository>
+                            <Description>${project.description}</Description>
+                            <Implementation-URL>${project.url}</Implementation-URL>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.6</version>
+                <version>3.2.8</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
+                <version>3.2.0</version>
                 <configuration>
-                    <mavenExecutorId>forked-path
-                    </mavenExecutorId> <!-- avoid a bug with GPG plugin hanging http://jira.codehaus.org/browse/MGPG-9 -->
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <tagNameFormat>@{project.version}</tagNameFormat>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.9.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <deploymentName>${project.artifactId}-${project.version}</deploymentName>
+                    <failOnBuildFailure>true</failOnBuildFailure>
+                    <waitUntil>validated</waitUntil>
                 </configuration>
             </plugin>
 

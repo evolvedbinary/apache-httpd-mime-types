@@ -3,6 +3,7 @@
 [![CircleCI](https://circleci.com/gh/evolvedbinary/apache-httpd-mime-types/tree/main.svg?style=svg)](https://circleci.com/gh/evolvedbinary/apache-httpd-mime-types/tree/main)
 [![Java 8](https://img.shields.io/badge/java-8+-blue.svg)](https://adoptopenjdk.net/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Maven Central](https://img.shields.io/maven-central/v/com.evolvedbinary.thirdparty.org.apache.httpd/apache-httpd-mime-types?logo=apachemaven&label=maven+central&color=green)](https://central.sonatype.com/search?namespace=com.evolvedbinary.thirdparty.org.apache.httpd)
 
 This Maven project simply downloads a `mime.types` file from the Apache HTTP Server project
 and creates a Jar file containing the file `META-INF/mime.types`.
