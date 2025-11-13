@@ -1,6 +1,7 @@
 # Apache HTTP Server mime.types for use with Java's [MimetypesFileTypeMap](https://docs.oracle.com/javase/8/docs/api/javax/activation/MimetypesFileTypeMap.html)
 
-[![Build Status](https://travis-ci.com/evolvedbinary/apache-httpd-mime-types.png?branch=main)](https://travis-ci.com/evolvedbinary/apache-httpd-mime-types)
+[![CircleCI](https://circleci.com/gh/evolvedbinary/apache-httpd-mime-types/tree/main.svg?style=svg)](https://circleci.com/gh/evolvedbinary/apache-httpd-mime-types/tree/main)
+[![Java 8](https://img.shields.io/badge/java-8+-blue.svg)](https://adoptopenjdk.net/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 This Maven project simply downloads a `mime.types` file from the Apache HTTP Server project
